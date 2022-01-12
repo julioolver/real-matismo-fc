@@ -13,7 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $models = ['Player'];
+
+        foreach($models as $model) {
+            $this->app->bind("App\Interfaces\I{$model}", "App\Services\\{$model}Service");
+        };
     }
 
     /**
