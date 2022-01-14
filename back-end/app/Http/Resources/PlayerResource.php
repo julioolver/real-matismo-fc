@@ -14,12 +14,12 @@ class PlayerResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'name' => $this->name,
-            'description' => $this->description,
-            'id' => $this->id
-        ];
+        // return [
+        //     'name' => $this->name,
+        //     'description' => $this->description,
+        //     'id' => $this->id
+        // ];
         //return parent::toArray($request);
-        //return $this->resource->toArray($request);
+        return $this->resource->toArray($request);
     }
 }

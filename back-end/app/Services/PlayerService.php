@@ -19,7 +19,23 @@ class PlayerService implements IPlayer
         $data = $request->all();
         $pageConf = [];
         $pageConf['per_page'] = isset($data['per_page']) ? $data['per_page'] : 10;
-        
+
+        if ($request->has('conditions')) {
+            $expressions = explode(';', $request->get('conditions'));
+
+            foreach ($expressions as $expression) {
+                $exp = explode(':',$expression);
+                $filterWHere = $this->playerRepository->filterWhere($exp);
+            }
+
+            dd($expressions);
+
+        }
+
+        if ($request->has('fields')) {
+            $fields = $request->get('fields');
+            return $this->playerRepository->filter($fields);
+        }
         return $this->playerRepository->all($pageConf);
     }
 

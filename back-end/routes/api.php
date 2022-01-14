@@ -25,11 +25,11 @@ Route::namespace('')->group(function () {
     Route::prefix('players')->group(function () {
         Route::get('/', [PlayerController::class, 'index']);
         Route::get('/{id}', [PlayerController::class, 'show']);
-        Route::post('/', [PlayerController::class, 'save']);
+        Route::post('/', [PlayerController::class, 'save'])->middleware('auth.basic');
         Route::put('/', [PlayerController::class, 'update']);
         Route::patch('/', [PlayerController::class, 'update']);
         Route::delete('/{id}', [PlayerController::class, 'delete']);
     });
-    
+
     Route::resource('/users', UserController::class);
 });
