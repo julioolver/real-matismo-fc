@@ -22,20 +22,15 @@ class PlayerService implements IPlayer
 
         if ($request->has('conditions')) {
             $expressions = explode(';', $request->get('conditions'));
-
-            foreach ($expressions as $expression) {
-                $exp = explode(':',$expression);
-                $filterWHere = $this->playerRepository->filterWhere($exp);
-            }
-
-            dd($expressions);
-
+            $filterWHere = $this->playerRepository->filterWhere($expressions);
+            //return $filterWHere->get();
         }
 
         if ($request->has('fields')) {
             $fields = $request->get('fields');
             return $this->playerRepository->filter($fields);
         }
+
         return $this->playerRepository->all($pageConf);
     }
 

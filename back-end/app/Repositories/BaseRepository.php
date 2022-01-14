@@ -14,14 +14,16 @@ abstract class BaseRepository
 
     public function all($pages): Object
     {
-       return $this->model->paginate($pages['per_page']);
+        return $this->model->paginate($pages['per_page']);
     }
 
     public function filterWhere($conditions)
     {
         $model = $this->model;
+        
         foreach ($conditions as $condition) {
-            $model = $model->where($condition);
+            $exp = explode(':', $condition);
+            $model = $model->where($exp[0], $exp[1]);
         }
 
         return $model;

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PlayerCollection;
 use App\Http\Resources\PlayerResource;
 use App\Interfaces\IPlayer;
+use App\Models\Player;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
@@ -20,7 +21,7 @@ class PlayerController extends Controller
     public function index(Request $request)
     {
         $players = $this->player->all($request);
-
+        $players2 = \App\Models\Player::findWhere('name', 'julio')->get();
         // return response()->json($players);
         return new PlayerCollection($players);
     }
